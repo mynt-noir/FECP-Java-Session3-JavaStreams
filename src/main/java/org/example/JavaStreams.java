@@ -33,6 +33,7 @@ public class JavaStreams {
             this.age = age;
         }
 
+        @Override
         public String toString() {
             String result;
             result = getName() + " - " + getAge();
@@ -106,14 +107,42 @@ public class JavaStreams {
         persons.add(new Person("Tricia", 25));
 
 
+        // comparator by age
+        Comparator<Integer> byAge = (a1, a2) -> a1 - a2;
+
         // sort by age (ascending)
         System.out.println("Sorted by age (ascending):");
-        
+
+        List<Person> sortAgeAsc = persons.stream()
+                .sorted(Comparator.comparingInt(Person::getAge))
+                .toList();
+
+        sortAgeAsc
+                .forEach(System.out::println);
+
+        System.out.println();
+
         // sort by name
         System.out.println("Sorted by name:");
 
+        List<Person> sortName = persons.stream()
+                .sorted(Comparator.comparing(Person::getName))
+                .toList();
+
+        sortName
+                .forEach(System.out::println);
+        System.out.println();
+
         // sort by age (descending)
         System.out.println("Sorted by age (descending):");
+        List<Person> sortAgeDesc = persons.stream()
+                .sorted(Comparator.comparingInt(Person::getAge))
+                .toList().reversed();
+
+        sortAgeDesc
+                .forEach(System.out::println);
+
+        System.out.println();
 
     }
     }
